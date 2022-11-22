@@ -1,2 +1,2 @@
 deploy to container testing
-deploy to war
+deploy to war to tomcat server
