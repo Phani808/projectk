@@ -110,5 +110,6 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>raviLogin</finalName
     </build>
 </project>
