@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        VERSION = "$(env.BUILD_ID)"
+    }
 
     stages {
         stage('Repo cloning') {
@@ -22,11 +25,9 @@ pipeline {
         } 
         stage('upload artifact') {
             steps{
-                script {
-                    def version = readversion file: 'pom.xml'
-            nexusArtifactUploader artifacts: [[artifactId: 'raviLogin', classifier: '', file: 'target/raviLogin-1.0.war', type: 'war']], credentialsId: 'nexus_id', groupId: 'wipro.raviLogin', nexusUrl: '172.31.8.94:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'phani-repo', version: "$(version)"
+                
+            nexusArtifactUploader artifacts: [[artifactId: 'raviLogin', classifier: '', file: 'target/raviLogin-1.0.war', type: 'war']], credentialsId: 'nexus_id', groupId: 'wipro.raviLogin', nexusUrl: '172.31.8.94:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'phani-repo', version: "$(VERSION)"
         }
             }
     }
-}
 }
