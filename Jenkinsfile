@@ -22,7 +22,7 @@ pipeline {
         } 
         stage('upload artifact') {
             steps{
-             nexusArtifactUploader artifacts: [[artifactId: 'WebApp', classifier: '', file: 'target/WebApp-1.0-SNAPSHOT.war', type: 'war']], credentialsId: 'nexus_id', groupId: 'lu.amazon.aws.demo', nexusUrl: '172.31.8.94:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'phani-repo', version: '1.0-SNAPSHOT' 
+            nexusArtifactUploader artifacts: [[artifactId: 'raviLogin', classifier: '', file: 'target/raviLogin-1.0.war', type: 'war']], credentialsId: 'nexus_id', groupId: 'wipro.raviLogin', nexusUrl: '172.31.8.94:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'phani-repo', version: '1.0'
         }
     }
 }
