@@ -25,8 +25,9 @@ pipeline {
         } 
         stage('upload artifact') {
             steps{
+                def mavenPom = readMavenPom 'pom.xml'
                 
-            nexusArtifactUploader artifacts: [[artifactId: 'raviLogin', classifier: '', file: 'target/raviLogin-1.0.war', type: 'war']], credentialsId: 'nexus_id', groupId: 'wipro.raviLogin', nexusUrl: '172.31.8.94:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'phani-repo', version: "$(VERSION)"
+            nexusArtifactUploader artifacts: [[artifactId: 'raviLogin', classifier: '', file: "target/raviLogin-${mavenPom.version}.war", type: 'war']], credentialsId: 'nexus_id', groupId: 'wipro.raviLogin', nexusUrl: '172.31.8.94:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'phani-repo', version: "${mavenPom.version}"
         }
             }
     }
