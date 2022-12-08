@@ -52,11 +52,11 @@ pipeline {
             stage('Build docker image'){
                 steps{
                       script{
-                        docker build . -t phani997\devops-training:1
+                        docker build . -t phani997/devops-training:1
                         withCredentials([string(credentialsId: 'docker-password', variable: 'docker')]) {
 }
-                        docker login -u phani997 -p $docker
-                        docker push phani997\devops-training:Docker_tag
+                        sh 'docker login -u phani997 -p $(docker)'
+                        sh docker push phani997/devops-training:1
     }
 }
             }
