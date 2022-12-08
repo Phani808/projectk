@@ -23,9 +23,10 @@ pipeline {
         stage('upload artifact') {
             steps{
                 script{
+                    def nexusRepoName = mavenPom.version.endsWith("SNAPSHOT") ? "phani1-snapshot" : "phani-repo"
                 def mavenPom = readMavenPom file: 'pom.xml'
                 
-            nexusArtifactUploader artifacts: [[artifactId: 'raviLogin', classifier: '', file: "target/raviLogin-${mavenPom.version}.war", type: 'war']], credentialsId: 'nexus_id', groupId: 'wipro.raviLogin', nexusUrl: '172.31.8.94:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'phani-repo', version: "${mavenPom.version}"
+            nexusArtifactUploader artifacts: [[artifactId: 'raviLogin', classifier: '', file: "target/raviLogin-${mavenPom.version}.war", type: 'war']], credentialsId: 'nexus_id', groupId: 'wipro.raviLogin', nexusUrl: '172.31.8.94:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'nexusRepoName', version: "${mavenPom.version}"
         }
             }
             }
