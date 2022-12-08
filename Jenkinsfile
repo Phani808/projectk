@@ -1,9 +1,15 @@
+def getDockerTag(){
+    def tag = sh script: 'git rev-parse HEAD' , returnStdout:true
+    return tag
+}
 pipeline {
     agent any
     options {
   buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '3')
 }
-    
+environment {
+    Docker_tag = getDockerTag()
+}
     stages {
         stage('Repo cloning') {
             steps {
@@ -47,6 +53,17 @@ pipeline {
                      version: "${mavenPom.version}"
         }
             }
+            }
+            stage('Build docker image'){
+                steps{
+                      script{
+                        docker build . -t phani997\devops-training:Docker_tag
+                        withCredentials([string(credentialsId: 'docker-password', variable: 'docker')]) {
+}
+                        docker login -u phani997 -p $docker
+                        docker push phani997\devops-training:Docker_tag
+    }
+}
             }
     }
 }
