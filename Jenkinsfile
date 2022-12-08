@@ -52,7 +52,7 @@ pipeline {
             stage('Build docker image'){
                 steps{
                       script{
-                    sh docker build . -t phani997/raviLogin-2.0-SNAPSHOT.war:1
+                    sh docker build . -t phani997/raviLogin-2.0-SNAPSHOT .
                         
     }
 }
