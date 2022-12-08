@@ -53,10 +53,7 @@ pipeline {
                 steps{
                       script{
                     sh docker build . -t phani997/raviLogin-${mavenPom.version}.war:1
-                        withCredentials([string(credentialsId: 'docker-password', variable: 'docker')]) {
-}
-                        sh 'docker login -u phani997 -p $(docker)'
-                        sh docker push phani997/devops-training:1
+                        
     }
 }
             }
